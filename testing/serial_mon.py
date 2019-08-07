@@ -33,8 +33,9 @@ print("Publishing...")
 with Serial('/dev/ttyACM0', baudrate=9600, timeout=None) as ser:
     while(True):
         line = ser.readline()   # read a '\n' terminated line
+        decodedLine = line.decode('utf-8')
         ret = client.publish(
-            "arup-8-fitzroy-street/UDMIduino-000/events", str(line))
+            "arup-8-fitzroy-street/UDMIduino-000/events", decodedLine)
 
 client.loop_stop()  # Stop loop
 client.disconnect()  # disconnect
