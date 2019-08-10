@@ -34,9 +34,8 @@ with Serial('/dev/ttyACM0', baudrate=9600, timeout=None) as ser:
     while(True):
         line = ser.readline()   # read a '\n' terminated line
         try:
-            decodedLine = line.decode('utf-8')
-            ret = client.publish(
-            "arup-8-fitzroy-street/UDMIduino-000/events", decodedLine)
+            decodedLine = line.decode('utf-8').rstrip()
+            ret = client.publish("arup-8-fitzroy-street/UDMIduino-000/events", '{"present_value":62}')
         except:
             print('Serial is a bit janky, retrying...')
             sleep(0.5)
