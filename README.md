@@ -34,7 +34,7 @@ Publishing...
 ```
  
 - Sanity check communications are happening correctly:
-    - With the mosquitto docker container _still running_ on the 'Pi, enter the 'ash' shell. (No, it's not bash, the mosquitto image uses Alpine linux): `docker exec -it --name-of-image-- /bin/ash`. Find the name of your mosquitto image with `docker ps` e.g. `docker exec -it amazing_wright /bin/ash`
+    - With the mosquitto docker container _still running_ on the 'Pi, enter the 'ash' shell. (No, it's not bash, the mosquitto image uses Alpine linux): `docker exec -it --name-of-image-- ash`. Find the name of your mosquitto image with `docker ps` e.g. `docker exec -it amazing_wright ash`
     - Check that packets are coming through with `mosquitto_sub -t arup-8-fitzroy-street/UDMIduino-000/events`
 
 e.g.
