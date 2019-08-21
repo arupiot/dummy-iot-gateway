@@ -65,8 +65,14 @@ b'{"version":1,"timestamp":"0","points":{"lux_level":{"present_value":47},"lum_v
 
 ## Other helpful commands
 
-Subscribe to _all_ topics with `mosquito_sub`
+Subscribe to _all_ topics with `mosquito_sub`:
 
 ```
 mosquitto_sub -v -h localhost -p 1883 -t '#'
+```
+
+Mount the code on the 'Pi gateway to your local machine, e.g.
+
+```
+sudo sshfs -o allow_other  pirate@10.8.0.62:/home/pirate/WPitC ./mnt
 ```
