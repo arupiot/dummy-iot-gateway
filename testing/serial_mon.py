@@ -6,7 +6,7 @@ import paho.mqtt.client as mqtt  # import the client1
 SERIAL_CONN = '/dev/ttyACM0'
 SERIAL_BAUD = 9600
 BROKER = "localhost"
-BROKER_PORT = 8080
+BROKER_PORT = 1883
 ser = Serial(SERIAL_CONN, baudrate=SERIAL_BAUD, timeout=None)
 
 # To become a generic mapping function
