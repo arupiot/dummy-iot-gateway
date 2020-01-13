@@ -5,6 +5,8 @@ import paho.mqtt.client as mqtt  # import the client1
 
 SERIAL_CONN = '/dev/ttyACM0'
 SERIAL_BAUD = 9600
+BROKER = "localhost"
+BROKER_PORT = 8080
 ser = Serial(SERIAL_CONN, baudrate=SERIAL_BAUD, timeout=None)
 
 # To become a generic mapping function
@@ -30,14 +32,13 @@ def on_message(client, userdata, message):
 
 
 mqtt.Client.connected_flag = False  # create flag in class
-broker = "localhost"
 client = mqtt.Client("DitTICK Dummy Gateway")  # create new instance
 client.on_connect = on_connect  # bind call back function
 client.on_message = on_message #attach function to callback
 client.loop_start()
 
-print("Connecting to broker ", broker)
-client.connect(broker)  # connect to broker
+print("Connecting to broker ", BROKER)
+client.connect(BROKER, BROKER_PORT, 60)  # connect to broker
 
 # Subscribe to the topic from ditto (or elsewhere)
 
