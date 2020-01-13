@@ -31,7 +31,7 @@ def on_message(client, userdata, message):
 
 mqtt.Client.connected_flag = False  # create flag in class
 broker = "localhost"
-client = mqtt.Client("WPitC Dummy Gateway")  # create new instance
+client = mqtt.Client("DitTICK Dummy Gateway")  # create new instance
 client.on_connect = on_connect  # bind call back function
 client.on_message = on_message #attach function to callback
 client.loop_start()
@@ -46,7 +46,7 @@ while not client.connected_flag:  # wait in loop
     sleep(1)
 
 print("Subscribing to LED toggle topic... ")
-client.subscribe("arup-8-fitzroy-street/UDMIduino-000/lum-value")
+client.subscribe("dittick/UDMIduino-000/lum-value")
 
 print("in Main Loop")
 print("Publishing...")
@@ -55,7 +55,7 @@ while(True):
     line = ser.readline()   # read a '\n' terminated line
     try:
         decodedLine = line.decode('utf-8').rstrip()
-        ret = client.publish("arup-8-fitzroy-street/UDMIduino-000/events", decodedLine)
+        ret = client.publish("dittick/UDMIduino-000/events", decodedLine)
     except:
         print('Serial is a bit janky, retrying...')
         sleep(0.5)
