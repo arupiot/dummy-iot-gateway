@@ -11,7 +11,7 @@ Tested on HypriotOS (based on Debian 9.8)
 Mosquitto is currently run via:
 
 ```
-    docker run -it -p 8080:1883 -p 9001:9001 eclipse-mosquitto
+    docker run -it -p 3389:1883 -p 9001:9001 eclipse-mosquitto
 ```
 
 Docker image here: https://cloud.docker.com/u/arupiot/repository/docker/arupiot/dummy-gateway
@@ -21,7 +21,7 @@ Docker image here: https://cloud.docker.com/u/arupiot/repository/docker/arupiot/
 ### Steps
 
 - Plug in the UDMIduino via USB into the 'Pi
-- On the 'Pi, start mosquitto: `docker run -it -p 1883:1883 -p 9001:9001 eclipse-mosquitto`
+- On the 'Pi, start mosquitto: `docker run -it -p 3389:1883 -p 9001:9001 eclipse-mosquitto`
 - Run serial_mon.py: `sudo python3 serial_mon.py`
     - This converts serial UDMI messages from the Arduino into MQTT
     - Messages are published on topic = 'arup-8-fitzroy-street/UDMIduino-000/events'
