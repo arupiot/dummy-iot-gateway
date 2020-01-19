@@ -1,12 +1,12 @@
 import serial
 from time import sleep
 from serial import Serial
-import paho.mqtt.client as mqtt  # import the client1
+import paho.mqtt.client as mqtt
 
 SERIAL_CONN = '/dev/ttyACM0'
 SERIAL_BAUD = 9600
 BROKER = "localhost"
-BROKER_PORT = 1883
+BROKER_PORT = 3389
 ser = Serial(SERIAL_CONN, baudrate=SERIAL_BAUD, timeout=None)
 
 # To become a generic mapping function
