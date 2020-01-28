@@ -2,12 +2,22 @@ import serial
 from time import sleep
 from serial import Serial
 import paho.mqtt.client as mqtt
+from UDummyMI import UDummyMI
 
+DUMMY_MODE = False
 SERIAL_CONN = '/dev/ttyACM0'
 SERIAL_BAUD = 9600
 BROKER = "localhost"
 BROKER_PORT = 3389
-ser = Serial(SERIAL_CONN, baudrate=SERIAL_BAUD, timeout=None)
+DUMMY_DEVICE = UDummyMI()
+UDMIDUINO_PUB_TOPIC = 'dittick/UDMIduino-000/events'
+UDMIDUINO_SUB_TOPIC = 'dittick/UDMIduino-000/lum-value'
+
+try:
+    ser = Serial(SERIAL_CONN, baudrate=SERIAL_BAUD, timeout=None)
+except:
+    print("Could not connect to the serial line, activating DUMMY_MODE")
+    DUMMY_MODE = True
 
 # To become a generic mapping function
 # mqtt2bacnet could feature BAC0?
@@ -47,19 +57,23 @@ while not client.connected_flag:  # wait in loop
     sleep(1)
 
 print("Subscribing to LED toggle topic... ")
-client.subscribe("dittick/UDMIduino-000/lum-value")
+client.subscribe(UDMIDUINO_SUB_TOPIC)
 
 print("in Main Loop")
 print("Publishing...")
 
 while(True):
-    line = ser.readline()   # read a '\n' terminated line
-    try:
-        decodedLine = line.decode('utf-8').rstrip()
-        ret = client.publish("dittick/UDMIduino-000/events", decodedLine)
-    except:
-        print('Serial is a bit janky, retrying...')
-        sleep(0.5)
+    if not DUMMY_MODE:
+        line = ser.readline()   # read a '\n' terminated line
+        try:
+            decodedLine = line.decode('utf-8').rstrip()
+            ret = client.publish(UDMIDUINO_PUB_TOPIC, decodedLine)
+        except:
+            print('Serial is a bit janky, retrying...')
+            sleep(0.5)
+    elif DUMMY_MODE:
+        ret = client.publish(UDMIDUINO_PUB_TOPIC, DUMMY_DEVICE.generateMessage())
+        sleep(0.4)
 
 client.loop_stop()  # Stop loop
 client.disconnect()  # disconnect
