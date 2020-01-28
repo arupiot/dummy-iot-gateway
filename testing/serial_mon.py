@@ -2,14 +2,14 @@ import serial
 from time import sleep
 from serial import Serial
 import paho.mqtt.client as mqtt
-from UDummyMI import UDummyMI
+from UDumMI import UDumMI
 
 DUMMY_MODE = False
 SERIAL_CONN = '/dev/ttyACM0'
 SERIAL_BAUD = 9600
 BROKER = "localhost"
 BROKER_PORT = 3389
-DUMMY_DEVICE = UDummyMI()
+DUMMY_DEVICE = UDumMI()
 UDMIDUINO_PUB_TOPIC = 'dittick/UDMIduino-000/events'
 UDMIDUINO_SUB_TOPIC = 'dittick/UDMIduino-000/lum-value'
 

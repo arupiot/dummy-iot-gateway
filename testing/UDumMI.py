@@ -2,7 +2,7 @@ from datetime import datetime
 import json
 import random
 
-class UDummyMI():
+class UDumMI():
     def __init__(self):
         self.message_config = {
             "version": 1,
