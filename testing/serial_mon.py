@@ -23,7 +23,10 @@ except:
 # mqtt2bacnet could feature BAC0?
 
 def mqtt2serial(message, ser):
-    ser.write(b't')
+    try:
+        ser.write(b't')
+    except:
+        print("Problem writing back to the serial line, you might be in DUMMY_MODE")
 
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
